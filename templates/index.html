@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+  <header class="text-center p-10 bg-stone-700">
+    <h1 class="text-4xl font-bold text-orange-400 tracking-widest">UDNEP</h1>
+  </header>
+
+  <main class="bg-stone-200">
+    <div class="min-w-min max-w-screen-md mx-auto py-5 text-center">
+      
+      <!-- Image du pendu -->
+      <img src="../static/images/pendu{{data.vies}}.png" class="m-auto">
+      
+      <!-- Notre "mot à afficher", récupéré depuis la data -->
+      <p class="text-3xl text-bold mt-8">{{data.mot_a_afficher}}</p>
+      <!-- Nos vies (idem) -->
+      <p class="text-xl mb-8">Vies : {{data.vies}}</p>
+
+      {% if data.victoire %}
+      <!-- Message de victoire -->
+      <h2 class="text-xl">FELICITATIONS</h2>
+      <p>Tu as trouvé le mot !</p>
+      <a href="/"><button class="bg-orange-400 rounded-full m-2 p-2">Recommencer</button></a>
+      {% elif data.defaite %}
+      <!-- Message de défaite -->
+      <h2 class="text-xl">DOMMAGE...</h2>
+      <p>Le mot était : {{data.mot_a_deviner}}</p>
+      <a href="/"><button class="bg-orange-400 rounded-full m-2 p-2">Recommencer</button></a>
+      {% else %}
+      <!-- Le formulaire pour entrer sa lettre / son mot
+      Ce formulaire redirige vers la route "/deviner" -->
+      <form action="/deviner" method="POST">
+        <input type = "text" name="entree" class="border-2 border-stone-900">
+        <div class="w-full">
+          <button type="submit" class="bg-orange-400 rounded-full m-2 p-2">Valider</button>
+        </div>
+      </form>
+      {% endif %}
+    </div>
+
+  </main>
+
+  <footer class="bg-stone-700 p-10 text-center">
+    <p class="text-orange-400 text-xs">Ceci est un footer dont le but est purement esthétique</p>
+  </footer>
+  
+</body>
+</html>
